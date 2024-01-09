@@ -33,6 +33,7 @@ protected:
 	//Camera Variables
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	class USpringArmComponent* CameraBoom;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	class UCameraComponent* ViewCamera;
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	float CameraArmLenght = 300.f;
