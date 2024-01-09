@@ -73,7 +73,7 @@ void AMyCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 
 	if (UEnhancedInputComponent* EnhancedInputComponent = CastChecked<UEnhancedInputComponent>(PlayerInputComponent))
 	{
-		EnhancedInputComponent->BindAction(LockTargetOnAction, ETriggerEvent::Triggered, this, &AMyCharacter::isTragetLockedOn);
+		//EnhancedInputComponent->BindAction(LockTargetOnAction, ETriggerEvent::Triggered, this, &AMyCharacter::isTragetLockedOn);
 	}
 
 }
