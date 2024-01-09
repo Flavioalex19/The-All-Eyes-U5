@@ -47,6 +47,18 @@ void AMyCharacter::BeginPlay()
 	
 }
 
+void AMyCharacter::isTragetLockedOn()
+{
+	if(!TargetLocked)
+	{
+		TargetLocked = true;
+	}
+	else
+	{
+		TargetLocked = false;
+	}
+}
+
 // Called every frame
 void AMyCharacter::Tick(float DeltaTime)
 {
@@ -58,6 +70,11 @@ void AMyCharacter::Tick(float DeltaTime)
 void AMyCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
+
+	if (UEnhancedInputComponent* EnhancedInputComponent = CastChecked<UEnhancedInputComponent>(PlayerInputComponent))
+	{
+		EnhancedInputComponent->BindAction(LockTargetOnAction, ETriggerEvent::Triggered, this, &AMyCharacter::isTragetLockedOn);
+	}
 
 }
 

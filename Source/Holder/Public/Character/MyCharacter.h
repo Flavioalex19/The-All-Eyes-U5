@@ -27,6 +27,8 @@ protected:
 	class UInputAction* MoveAction;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category= Input)
 	class UInputAction* LookAction;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category= Input)
+	class UInputAction* LockTargetOnAction;
 
 	//Camera Variables
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
@@ -34,6 +36,15 @@ protected:
 	class UCameraComponent* ViewCamera;
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	float CameraArmLenght = 300.f;
+
+	//stance variables and lock on varuiables
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	bool TargetLocked = false;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	float DistanceFromTarget;
+
+
+	void isTragetLockedOn();
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
