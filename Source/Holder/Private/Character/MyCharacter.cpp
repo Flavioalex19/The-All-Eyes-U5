@@ -64,6 +64,10 @@ void AMyCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	if(TargetLocked)ActionState = EActionState::LockOnState;
+	else ActionState = EActionState::KnightState;
+	
+
 }
 
 // Called to bind functionality to input

@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "InputActionValue.h"
+#include "CharacterStates.h"
 #include "MyCharacter.generated.h"
 
 UCLASS()
@@ -19,6 +20,9 @@ public:
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	bool TargetLocked = false;
 
 	//Inputs
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category= Input)
@@ -39,8 +43,10 @@ protected:
 	float CameraArmLenght = 300.f;
 
 	//stance variables and lock on varuiables
+	/*
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	bool TargetLocked = false;
+	*/
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	float DistanceFromTarget;
 
@@ -52,5 +58,9 @@ public:
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
-
+private:
+	
+	UPROPERTY(VisibleAnywhere,BlueprintReadWrite, meta=(AllowPrivateAccess = "true"))
+	EActionState ActionState = EActionState::KnightState;
+	
 };
