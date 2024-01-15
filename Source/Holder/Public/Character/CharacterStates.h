@@ -6,4 +6,5 @@ enum class EActionState:uint8
 {
 	KnightState,
 	LockOnState,
+	Attacking,
 };

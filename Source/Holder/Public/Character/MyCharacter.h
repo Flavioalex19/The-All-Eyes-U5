@@ -17,6 +17,15 @@ public:
 	// Sets default values for this character's properties
 	AMyCharacter();
 
+	UPROPERTY(VisibleAnywhere, Category = Variables)
+	int32 ComboCount = 0;
+	UPROPERTY(EditAnywhere, Category = Variables)
+	float ResetTimer;
+	UPROPERTY(VisibleAnywhere, Category = Variables)
+	float Timer = ResetTimer;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite,Category = Variables)
+	bool CanAttack = false;
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -34,6 +43,14 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category= Input)
 	class UInputAction* LockTargetOnAction;
 
+	//Combat
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category= Input)
+	class UInputAction* AttackAction;
+	UPROPERTY(EditAnywhere, Category = Montages)
+	class UAnimMontage* AttackMontage;
+	
+	
+	
 	//Camera Variables
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	class USpringArmComponent* CameraBoom;
@@ -52,6 +69,8 @@ protected:
 
 
 	void isTragetLockedOn();
+	void Attack(const FInputActionValue& Value);
+	void PlayMontage();
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;

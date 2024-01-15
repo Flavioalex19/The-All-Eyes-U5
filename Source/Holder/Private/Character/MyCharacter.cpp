@@ -7,6 +7,7 @@
 #include "EnhancedInputSubsystems.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "Camera/CameraComponent.h"
+#include "Animation/AnimMontage.h"
 #include "GameFramework/CharacterMovementComponent.h"
 
 // Sets default values
@@ -59,6 +60,38 @@ void AMyCharacter::isTragetLockedOn()
 	}
 }
 
+void AMyCharacter::Attack(const FInputActionValue& Value)
+{
+	
+	if(CanAttack == false || Timer < ResetTimer/2)
+	{
+		
+		CanAttack = true;
+		Timer = ResetTimer;
+		PlayMontage();
+		ActionState = EActionState::Attacking;
+	}
+}
+
+void AMyCharacter::PlayMontage()
+{
+	
+	UAnimInstance* AnimInstance = GetMesh()->GetAnimInstance();
+	if (AnimInstance && AttackMontage)
+	{
+		ComboCount++;
+		AnimInstance->Montage_Play(AttackMontage);
+		int32 Selection = ComboCount;
+		FName SectionName = FName();
+		if(ComboCount%2 != 0){SectionName = FName("Attack0");}
+		else {SectionName = FName("Attack1");}
+		AnimInstance->Montage_JumpToSection(SectionName, AttackMontage);
+		
+		
+		
+	}
+}
+
 // Called every frame
 void AMyCharacter::Tick(float DeltaTime)
 {
@@ -66,6 +99,17 @@ void AMyCharacter::Tick(float DeltaTime)
 
 	if(TargetLocked)ActionState = EActionState::LockOnState;
 	else ActionState = EActionState::KnightState;
+
+	if (CanAttack)
+	{
+		Timer-= DeltaTime;
+		if (Timer<0)
+		{
+			CanAttack = false;
+			Timer = ResetTimer;
+			ComboCount = 0;
+		}
+	}
 	
 
 }
@@ -78,6 +122,7 @@ void AMyCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 	if (UEnhancedInputComponent* EnhancedInputComponent = CastChecked<UEnhancedInputComponent>(PlayerInputComponent))
 	{
 		//EnhancedInputComponent->BindAction(LockTargetOnAction, ETriggerEvent::Triggered, this, &AMyCharacter::isTragetLockedOn);
+		EnhancedInputComponent->BindAction(AttackAction, ETriggerEvent::Triggered, this, &AMyCharacter::Attack);
 	}
 
 }
