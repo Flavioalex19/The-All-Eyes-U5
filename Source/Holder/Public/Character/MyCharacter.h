@@ -17,6 +17,7 @@ public:
 	// Sets default values for this character's properties
 	AMyCharacter();
 
+	//Combat Variables
 	UPROPERTY(VisibleAnywhere, Category = Variables)
 	int32 ComboCount = 0;
 	UPROPERTY(EditAnywhere, Category = Variables)
@@ -33,6 +34,21 @@ protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	bool TargetLocked = false;
 
+	//Stats
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category= CharacterStats)
+	float Max_HP;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category= CharacterStats)
+	float Hp;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category= CharacterStats)
+	float MaxStamina;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category= CharacterStats)
+	float Stamina;
+
+	//Currency-Souls
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category= Echos)
+	float Echos;
+	
+	
 	//Inputs
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category= Input)
 	class UInputMappingContext* MyMapping;
