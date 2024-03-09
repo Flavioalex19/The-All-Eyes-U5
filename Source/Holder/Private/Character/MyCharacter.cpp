@@ -8,6 +8,8 @@
 #include "GameFramework/SpringArmComponent.h"
 #include "Camera/CameraComponent.h"
 #include "Animation/AnimMontage.h"
+#include "AbilitySystemComponent.h"
+#include "Attribute/MyCharacterAttributeSet.h"
 #include "GameFramework/CharacterMovementComponent.h"
 
 // Sets default values
@@ -28,6 +30,8 @@ AMyCharacter::AMyCharacter()
 	ViewCamera->SetupAttachment(CameraBoom);
 
 	AutoPossessPlayer = EAutoReceiveInput::Player0;
+
+	AbilitySystemComponent = CreateDefaultSubobject<UAbilitySystemComponent>(TEXT("AbilitySystemComponent"));
 }
 
 // Called when the game starts or when spawned
@@ -44,6 +48,11 @@ void AMyCharacter::BeginPlay()
 			
 			Subsystem->AddMappingContext(MyMapping, 0);
 		}
+	}
+
+	if(IsValid(AbilitySystemComponent))
+	{
+		CharacterAttributeSet = AbilitySystemComponent->GetSet<UMyCharacterAttributeSet>();
 	}
 	
 }

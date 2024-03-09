@@ -6,10 +6,12 @@
 #include "GameFramework/Character.h"
 #include "InputActionValue.h"
 #include "CharacterStates.h"
+#include "AbilitySystemComponent.h"
+#include "AbilitySystemInterface.h"
 #include "MyCharacter.generated.h"
 
 UCLASS()
-class HOLDER_API AMyCharacter : public ACharacter
+class HOLDER_API AMyCharacter : public ACharacter, public IAbilitySystemInterface
 {
 	GENERATED_BODY()
 
@@ -48,6 +50,17 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category= Echos)
 	float Echos;
 	
+	//GameplayAbilities
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="GAS")
+	class UAbilitySystemComponent* AbilitySystemComponent;
+
+	virtual class UAbilitySystemComponent* GetAbilitySystemComponent() const override
+	{
+		return AbilitySystemComponent;
+	};
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="GAS")
+	const class UMyCharacterAttributeSet* CharacterAttributeSet;
 	
 	//Inputs
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category= Input)
