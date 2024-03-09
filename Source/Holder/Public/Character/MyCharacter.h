@@ -20,11 +20,11 @@ public:
 	AMyCharacter();
 
 	//Combat Variables
-	UPROPERTY(VisibleAnywhere, Category = Variables)
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite,Category = Variables)
 	int32 ComboCount = 0;
-	UPROPERTY(EditAnywhere, Category = Variables)
+	UPROPERTY(EditAnywhere, BlueprintReadOnly,Category = Variables)
 	float ResetTimer;
-	UPROPERTY(VisibleAnywhere, Category = Variables)
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite,Category = Variables)
 	float Timer = ResetTimer;
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite,Category = Variables)
 	bool CanAttack = false;
@@ -35,7 +35,7 @@ protected:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	bool TargetLocked = false;
-
+	/*
 	//Stats
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category= CharacterStats)
 	float Max_HP;
@@ -45,7 +45,7 @@ protected:
 	float MaxStamina;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category= CharacterStats)
 	float Stamina;
-
+	*/
 	//Currency-Souls
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category= Echos)
 	float Echos;
