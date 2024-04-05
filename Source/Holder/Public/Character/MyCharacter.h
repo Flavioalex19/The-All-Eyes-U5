@@ -78,7 +78,15 @@ protected:
 	UPROPERTY(EditAnywhere, Category = Montages)
 	class UAnimMontage* AttackMontage;
 	
-	
+	//Adrenaline Variables
+	UPROPERTY(EditAnywhere,BlueprintReadWrite, Category = AdrenalineVariables)
+	float AdrenalineTimer = 0;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = AdrenalineVariables)
+	float AdrenalineTimerReset;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = AdrenalineVariables)
+	float AdrenalineValue = 0;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = AdrenalineVariables)
+	float MaxAdrenaline = 100;
 	
 	//Camera Variables
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
