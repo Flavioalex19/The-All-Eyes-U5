@@ -34,4 +34,8 @@ public:
 	UPROPERTY(BlueprintReadOnly, Category="Attributes")
 	FGameplayAttributeData MaxStamina;
 	ATTRIBUTE_ACCESSORS(UMyCharacterAttributeSet, MaxStamina);
+
+	UPROPERTY(BlueprintReadOnly, Category="Attributes")
+	FGameplayAttributeData Level;
+	ATTRIBUTE_ACCESSORS(UMyCharacterAttributeSet, Level);
 };
