@@ -38,4 +38,20 @@ public:
 	UPROPERTY(BlueprintReadOnly, Category="Attributes")
 	FGameplayAttributeData Level;
 	ATTRIBUTE_ACCESSORS(UMyCharacterAttributeSet, Level);
+
+	UPROPERTY(BlueprintReadOnly, Category="Attributes")
+	FGameplayAttributeData MaxXP;
+	ATTRIBUTE_ACCESSORS(UMyCharacterAttributeSet, MaxXP);
+
+	UPROPERTY(BlueprintReadOnly, Category="Attributes")
+	FGameplayAttributeData CurrentXP;
+	ATTRIBUTE_ACCESSORS(UMyCharacterAttributeSet, CurrentXP);
+
+	UPROPERTY(BlueprintReadOnly, Category="Attributes")
+	FGameplayAttributeData Damage;
+	ATTRIBUTE_ACCESSORS(UMyCharacterAttributeSet, Damage);
+
+	UPROPERTY(BlueprintReadOnly, Category="Attributes")
+	FGameplayAttributeData Defense;
+	ATTRIBUTE_ACCESSORS(UMyCharacterAttributeSet, Defense);
 };
