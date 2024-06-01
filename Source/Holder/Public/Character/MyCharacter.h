@@ -20,14 +20,21 @@ public:
 	AMyCharacter();
 
 	//Combat Variables
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite,Category = Variables)
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite,Category = CombatVariables)
 	int32 ComboCount = 0;
-	UPROPERTY(EditAnywhere, BlueprintReadOnly,Category = Variables)
+	UPROPERTY(EditAnywhere, BlueprintReadOnly,Category = CombatVariables)
 	float ResetTimer;
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite,Category = Variables)
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite,Category = CombatVariables)
 	float Timer = ResetTimer;
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite,Category = Variables)
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite,Category = CombatVariables)
 	bool CanAttack = false;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite,Category = CombatVariables)
+	bool CanResetBuffer = false;
+	
+	//Test
+	UPROPERTY(EditAnywhere,BlueprintReadWrite,Category = CombatSysytem)
+	TArray<UAnimMontage*> BasicAttackMontageArray;
+	
 
 protected:
 	// Called when the game starts or when spawned
@@ -104,6 +111,8 @@ protected:
 	void isTragetLockedOn();
 	void Attack(const FInputActionValue& Value);
 	void PlayMontage();
+	//Test
+	void NewAttackSystem();
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;

@@ -101,6 +101,53 @@ void AMyCharacter::PlayMontage()
 	}
 }
 
+void AMyCharacter::NewAttackSystem()
+{
+	/*
+	if(CanAttack == false)
+	{
+		CanAttack = true;
+		//// Check if the ComboCount is within the bounds of the array 
+		if(TestBasicAttackMontageArray.IsValidIndex(ComboCount))
+		{
+			PlayAnimMontage(TestBasicAttackMontageArray[ComboCount]);
+			ComboCount++;
+		}
+		else
+		{
+			ComboCount = 0;
+			PlayAnimMontage(0);
+		}
+		
+	}
+	*/
+	if (!CanAttack)
+	{
+		CanAttack = true;
+		CanResetBuffer = true;
+		Timer = ResetTimer;
+		// Ensure ComboCount stays within the bounds of the array
+		if (BasicAttackMontageArray.Num() > 0)
+		{
+			//Protection
+			if (BasicAttackMontageArray.IsValidIndex(ComboCount))
+			{
+				PlayAnimMontage(BasicAttackMontageArray[ComboCount]);
+				ComboCount++;
+			}
+			// Reset ComboCount to 0 if it exceeds the array bounds
+			if (ComboCount >= BasicAttackMontageArray.Num())
+			{
+				ComboCount = 0;
+			}
+		}
+		else
+		{
+			UE_LOG(LogTemp, Warning, TEXT("TestBasicAttackMontageArray is empty."));
+		}
+	}
+}
+
 // Called every frame
 void AMyCharacter::Tick(float DeltaTime)
 {
@@ -109,18 +156,19 @@ void AMyCharacter::Tick(float DeltaTime)
 	if(TargetLocked)ActionState = EActionState::LockOnState;
 	else ActionState = EActionState::KnightState;
 
-	if (CanAttack)
+	
+	if (CanResetBuffer)
 	{
 		Timer-= DeltaTime;
 		if (Timer<0)
 		{
-			CanAttack = false;
+			//CanAttack = false;
+			CanResetBuffer = false;
 			Timer = ResetTimer;
 			ComboCount = 0;
 		}
 	}
 	
-
 }
 
 // Called to bind functionality to input
@@ -132,6 +180,7 @@ void AMyCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 	{
 		//EnhancedInputComponent->BindAction(LockTargetOnAction, ETriggerEvent::Triggered, this, &AMyCharacter::isTragetLockedOn);
 		//EnhancedInputComponent->BindAction(AttackAction, ETriggerEvent::Triggered, this, &AMyCharacter::Attack);
+		EnhancedInputComponent->BindAction(AttackAction, ETriggerEvent::Triggered, this, &AMyCharacter::NewAttackSystem);
 	}
 
 }
